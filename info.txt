@@ -1,0 +1,39 @@
+- Logo (PetSwap 🐾)
+- Search bar (to find users or pets)
+- Notifications (e.g., new swap requests)
+- Profile dropdown (settings, logout)
+2. Sidebar Navigation
+- Dashboard (home)
+- My Pets
+- Swap Requests
+- Token Balance
+- Messages
+- Community (forums or tips)
+- Help / Support
+3. Main Dashboard Content
+🐶 Welcome Section
+- Greeting: “Hi Alex! Ready to swap some love?”
+- Quick stats:
+- Tokens: 120 🪙
+- Upcoming swaps: 2
+- Pending requests: 1
+📅 Upcoming Swaps
+- Card-style layout showing:
+- Pet name + photo
+- Dates of swap
+- Owner info
+- Location
+- Status (Confirmed / Pending)
+📥 Swap Requests
+- Incoming & outgoing requests
+- Accept / Decline buttons
+- Messaging option
+🐾 My Pets
+- Carousel or grid of user’s pets
+- “Add new pet” button
+🛍️ Token Activity
+- Earned/spent tokens
+- Recent transactions
+💬 Community Feed (Optional)
+- Tips, stories, or featured swaps
+- Encourages engagement
