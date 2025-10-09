@@ -1,6 +1,17 @@
+import { ScrollingText } from "@/components/ScrollingText";
+import Welcome from "@/components/summary/Welcome";
+import TabsWrapper from "@/components/TabsWrapper";
+import { fetchRecurringExpensesServer } from "@/data/fetch/server/fetchRecurringExpensesServer";
+import { fetchRemindersServer } from "@/data/fetch/server/fetchRemindersServer";
+import { fetchUniqueExpensesServer } from "@/data/fetch/server/fetchUniqueExpensesServer";
+import {
+  QUERY_RECURRING_EXPENSES,
+  QUERY_REMINDERS,
+  QUERY_UNIQUE_EXPENSES,
+} from "@/data/queryKeys";
 import { fetchUserServer } from "@/utilities/fetchUserServer";
 import { getQueryClient } from "@/utilities/ReactQuery/getQueryClient";
-import { Button, Stack } from "@mantine/core";
+import { Stack } from "@mantine/core";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { redirect } from "next/navigation";
 
@@ -14,29 +25,27 @@ const Dashboard = async () => {
   // this is a server component, prefetch data here to load into nested client components
   const queryClient = getQueryClient();
 
-  // await Promise.all([
-  //   queryClient.prefetchQuery({
-  //     queryKey: [QUERY_PETS],
-  //     queryFn: fetchPetsServer,
-  //   }),
-  //   queryClient.prefetchQuery({
-  //     queryKey: [QUERY_ALL_EVENTS],
-  //     queryFn: async () => fetchAllEventsServer(),
-  //   }),
-  //   queryClient.prefetchQuery({
-  //     queryKey: [QUERY_EVENTS],
-  //     queryFn: async () => fetchMyEventsServer(),
-  //   }),
-  //   queryClient.prefetchQuery({
-  //     queryKey: [QUERY_USER],
-  //     queryFn: fetchUserServer,
-  //   }),
-  // ]);
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: [QUERY_UNIQUE_EXPENSES],
+      queryFn: fetchUniqueExpensesServer,
+    }),
+    queryClient.prefetchQuery({
+      queryKey: [QUERY_RECURRING_EXPENSES],
+      queryFn: fetchRecurringExpensesServer,
+    }),
+    queryClient.prefetchQuery({
+      queryKey: [QUERY_REMINDERS],
+      queryFn: fetchRemindersServer,
+    }),
+  ]);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Stack>
-        <Button w="fit-content">Testing Dashboard</Button>
+        <ScrollingText />
+        <Welcome />
+        <TabsWrapper />
       </Stack>
     </HydrationBoundary>
   );

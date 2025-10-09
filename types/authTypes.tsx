@@ -4,12 +4,7 @@ type LoginFormValues = {
 };
 
 type RegistrationFormValues = {
-  firstName: string;
-  lastName: string;
-  city: string;
-  state: string;
-  zip: string;
-  phone?: string;
+  name?: string;
   email: string;
   password: string;
   password_confirmation: string;

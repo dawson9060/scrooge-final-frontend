@@ -1,5 +1,5 @@
 import { QUERY_USER } from "@/data/queryKeys";
-import { STATUS_OK } from "@/Enums/status-enums";
+import { STATUS_OK } from "@/enums/status-enums";
 import axiosInstance from "@/utilities/axiosInstance";
 import { useSuspenseQuery } from "@tanstack/react-query";
 

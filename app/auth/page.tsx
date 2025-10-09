@@ -1,6 +1,6 @@
 "use client";
 
-import { STATUS_OK } from "@/Enums/status-enums";
+import { STATUS_OK } from "@/enums/status-enums";
 import { useAuth } from "@/hooks/auth";
 import useToast from "@/hooks/toast";
 import {
@@ -87,12 +87,7 @@ const RegistrationForm = ({ setIsLogin }: { setIsLogin: Function }) => {
   const registrationForm = useForm({
     mode: "uncontrolled",
     initialValues: {
-      firstName: "",
-      lastName: "",
-      city: "",
-      state: "",
-      zip: "",
-      phone: "",
+      name: "",
       email: "",
       password: "",
       password_confirmation: "",
@@ -100,13 +95,6 @@ const RegistrationForm = ({ setIsLogin }: { setIsLogin: Function }) => {
 
     validate: {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
-      firstName: (value) =>
-        value.length > 0 ? null : "First name is required",
-      lastName: (value) => (value.length > 0 ? null : "Last name is required"),
-      city: (value) => (value.length > 0 ? null : "City is required"),
-      state: (value) => (value.length > 0 ? null : "State is required"),
-      zip: (value) =>
-        value.length !== 5 ? null : "5 Digit Zip Code is required",
       password: (value) =>
         value.length >= 8
           ? null
@@ -137,47 +125,11 @@ const RegistrationForm = ({ setIsLogin }: { setIsLogin: Function }) => {
     <Stack>
       <form onSubmit={registrationForm.onSubmit(handleRegistration)}>
         <TextInput
-          required
-          label="Name"
-          placeholder="First Name"
-          key={registrationForm.key("firstName")}
-          {...registrationForm.getInputProps("firstName")}
+          label="Optional - Name"
+          placeholder="Name"
+          key={registrationForm.key("name")}
+          {...registrationForm.getInputProps("name")}
         />
-        <TextInput
-          required
-          label="Last Name"
-          placeholder="Last Name"
-          key={registrationForm.key("lastName")}
-          {...registrationForm.getInputProps("lastName")}
-        />
-        <TextInput
-          required
-          label="City"
-          placeholder="City"
-          key={registrationForm.key("city")}
-          {...registrationForm.getInputProps("city")}
-        />
-        <TextInput
-          withAsterisk
-          label="State"
-          placeholder="State"
-          key={registrationForm.key("state")}
-          {...registrationForm.getInputProps("state")}
-        />
-        <NumberInput
-          withAsterisk
-          label="Zip Code"
-          placeholder="Zip Code"
-          key={registrationForm.key("zip")}
-          {...registrationForm.getInputProps("zip")}
-        />
-        <TextInput
-          label="Optional - Phone"
-          placeholder="Phone"
-          key={registrationForm.key("phone")}
-          {...registrationForm.getInputProps("phone")}
-        />
-        <Divider />
         <TextInput
           withAsterisk
           label="Email"

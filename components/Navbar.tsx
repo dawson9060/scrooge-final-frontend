@@ -17,10 +17,6 @@ const Navbar = () => {
 
   return (
     <nav className={classes.nav}>
-      <Link href="/">
-        <Text>Site Name</Text>
-      </Link>
-
       <HydrationBoundary state={dehydrate(queryClient)}>
         <NavbarClient />
       </HydrationBoundary>

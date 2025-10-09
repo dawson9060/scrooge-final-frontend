@@ -1,11 +1,14 @@
 "use client";
 
-import { STATUS_OK } from "@/Enums/status-enums";
+import { STATUS_OK } from "@/enums/status-enums";
 import { useAuth } from "@/hooks/auth";
 import useToast from "@/hooks/toast";
-import { Group } from "@mantine/core";
+import { ActionIcon, Box, Burger, Button, Group, Text } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { TbSun } from "react-icons/tb";
+
+import classes from "./Navbar.module.css";
 
 const NavbarClient = () => {
   const { user, logout } = useAuth();
@@ -27,17 +30,44 @@ const NavbarClient = () => {
   };
 
   return (
-    <Group>
-      {user ? (
-        <Group>
-          <Link href="/dashboard">Dashboard</Link>
-          <Link href="#" onClick={handleLogout}>
-            Logout
-          </Link>
-        </Group>
-      ) : (
-        <Link href="/auth">Login / Register</Link>
-      )}
+    <Group w="100%">
+      <Box className={classes.container}>
+        <Link
+          href="/dashboard"
+          style={{
+            fontSize: "2rem",
+            textDecoration: "none",
+            color: "var(--mantine-color-gold-5)",
+            fontWeight: "700",
+          }}
+        >
+          Scrooge
+        </Link>
+        {user ? (
+          <>
+            <Group className={classes.links}>
+              <Text variant="link">Reminders</Text>
+              <Text variant="link">Logout</Text>
+              <ActionIcon size="sm" variant="transparent">
+                <TbSun />
+                {/* {computedColorScheme === "dark" ? (
+              <IconSunFilled color="ghostwhite" />
+            ) : (
+              <IconMoon color="black" />
+            )} */}
+              </ActionIcon>
+              <Button onClick={handleLogout}>Logout</Button>
+            </Group>
+            <Burger
+              className={classes.burger}
+              // opened={opened}
+              // onClick={() => setOpened((o) => !o)}
+            />
+          </>
+        ) : (
+          <Link href="/auth">Login / Register</Link>
+        )}
+      </Box>
     </Group>
   );
 };

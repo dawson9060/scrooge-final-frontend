@@ -1,0 +1,10 @@
+.root {
+  &[data-variant="link"] {
+    cursor: pointer;
+    transition: "color 150ms ease-in-out";
+
+    &:hover {
+      color: var(--mantine-color-blue-5);
+    }
+  }
+}

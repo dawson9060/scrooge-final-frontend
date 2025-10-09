@@ -9,6 +9,7 @@ import { Notifications } from "@mantine/notifications";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { theme } from "@/mantine/theme";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -32,7 +33,7 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body className={`${poppins.variable}`}>
-        <MantineProvider>
+        <MantineProvider theme={theme}>
           <Notifications />
           <Providers>
             <Navbar />

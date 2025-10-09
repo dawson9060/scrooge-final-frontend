@@ -1,4 +1,4 @@
-import { STATUS_UNAUTHENTICATED } from "@/Enums/status-enums";
+import { STATUS_UNAUTHENTICATED } from "@/enums/status-enums";
 import axios from "axios";
 
 const axiosInstance = axios.create({
