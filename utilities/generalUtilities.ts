@@ -48,17 +48,17 @@ export const getCalendarDate = (day: string | null) => {
   return date.toISOString().substring(0, 10);
 };
 
-export const getTimeGreeting = (name: string | null) => {
+export const getTimeGreeting = () => {
   const date = new Date();
   const hours = date.getHours();
 
   if (hours > 1 && hours < 12) {
-    return `Good Morning, ${name}`;
+    return `Good Morning`;
   } else if (hours >= 12 && hours < 18) {
-    return `Good Afternoon, ${name}`;
+    return `Good Afternoon`;
   }
 
-  return `Good Evening, ${name}`;
+  return `Good Evening`;
 };
 
 export const formatNumber = (number: number) => {

@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import { Provider as JotaiProvider } from "jotai";
 import Providers from "@/utilities/ReactQuery/Providers";
 import {
   ColorSchemeScript,
@@ -35,10 +36,12 @@ export default function RootLayout({
       <body className={`${poppins.variable}`}>
         <MantineProvider theme={theme}>
           <Notifications />
-          <Providers>
-            <Navbar />
-            {children}
-          </Providers>
+          <JotaiProvider>
+            <Providers>
+              <Navbar />
+              {children}
+            </Providers>
+          </JotaiProvider>
         </MantineProvider>
       </body>
     </html>

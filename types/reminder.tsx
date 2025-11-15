@@ -1,5 +1,6 @@
 export type Reminder = {
   id?: number;
   name: string;
-  date: string;
+  date: number;
+  isUpcoming?: boolean;
 };
