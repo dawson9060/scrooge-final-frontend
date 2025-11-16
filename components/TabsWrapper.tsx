@@ -1,14 +1,14 @@
 "use client";
 
 import { Tabs } from "@mantine/core";
-import Welcome from "./summary/Welcome";
-import QuickAdd from "./summary/QuickAdd";
-import RecurringExpenseForm from "./recurring/recurringInputs";
+import Calendar from "./Calendar";
 import RecurringExpenses from "./recurring/recurringExpenses";
-import UniqueExpenses from "./unique/uniqueExpenses";
-import Reminders from "./reminders/reminders";
-import UniqueExpenseForm from "./unique/uniqueInputs";
+import RecurringExpenseForm from "./recurring/recurringInputs";
 import ReminderForm from "./reminders/reminderInputs";
+import Reminders from "./reminders/reminders";
+import QuickAdd from "./summary/QuickAdd";
+import UniqueExpenses from "./unique/uniqueExpenses";
+import UniqueExpenseForm from "./unique/uniqueInputs";
 
 const TAB_SUMMARY = "summary";
 const TAB_RECURRING = "recurring";
@@ -27,6 +27,7 @@ const TabsWrapper = () => {
 
       <Tabs.Panel value={TAB_SUMMARY}>
         <QuickAdd />
+        <Calendar />
       </Tabs.Panel>
 
       <Tabs.Panel value={TAB_RECURRING}>

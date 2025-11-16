@@ -4,13 +4,14 @@ import axiosInstance from "@/utilities/axiosInstance";
 import { getQueryClient } from "@/utilities/ReactQuery/getQueryClient";
 import { useMutation } from "@tanstack/react-query";
 import { QUERY_RECURRING_EXPENSES } from "../queryKeys";
+import dayjs from "dayjs";
 
 const add = async (expense: RecurringExpense) => {
   const newExpense = { ...expense };
   const date = expense.day_of_month;
 
-  if (date) {
-    const day = new Date(date).getDate();
+  if (expense.day_of_month) {
+    const day = dayjs(date).date();
     newExpense.day_of_month = day;
   }
 

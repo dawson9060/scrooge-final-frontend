@@ -37,11 +37,11 @@ export const getAllDaysInRange = (start: string, end: string) => {
   return days;
 };
 
-export const getCalendarDate = (day: string | null) => {
+export const getCalendarDate = (day: number) => {
   const date = new Date();
 
   const daysInMonth = getDaysInMonth();
-  const finalDay = daysInMonth >= Number(day) ? day : getLastDayInMonth(date);
+  const finalDay = daysInMonth >= day ? day : getLastDayInMonth(date);
 
   date.setDate(Number(finalDay));
 
