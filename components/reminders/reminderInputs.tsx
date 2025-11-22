@@ -4,6 +4,7 @@ import { DateInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import { TbPlus } from "react-icons/tb";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const FormInputs = ({ form }: any) => {
   return (
     <Group gap={0}>
@@ -20,6 +21,7 @@ const FormInputs = ({ form }: any) => {
         required
         clearable
         defaultValue={null}
+        placeholder="Select Date&#42;"
         valueFormat="MM/DD/YYYY"
       />
       <Button type="submit" color="gold">
@@ -40,13 +42,17 @@ const ReminderForm = () => {
     },
   });
 
-  const handleAddReminder = async (data: any) => {
-    try {
-      console.log("Adding reminder with data:", data);
-      await addReminder.mutateAsync({ ...data });
-      form.reset();
-    } catch (errror) {
-      console.error("Error adding reminder:", errror);
+  const handleAddReminder = async (data: {
+    name: string;
+    date: string | null;
+  }) => {
+    if (data.name && data.date) {
+      try {
+        await addReminder.mutateAsync({ name: data.name, date: data.date });
+        form.reset();
+      } catch (errror) {
+        console.error("Error adding reminder:", errror);
+      }
     }
   };
 

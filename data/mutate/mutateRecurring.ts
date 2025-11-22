@@ -44,7 +44,7 @@ export const useAddRecurringExpense = () => {
       add(recurringExpense),
     onSettled: () =>
       queryClient.invalidateQueries({ queryKey: [QUERY_RECURRING_EXPENSES] }),
-    onSuccess: (res) =>
+    onSuccess: () =>
       showToast({
         title: "Successfully Added Recurring Expense",
         message: `Your recurring expenses have been updated`,
@@ -97,7 +97,7 @@ export const useDeleteRecurringExpense = () => {
     mutationFn: async (expenseId: number) => expenseDelete(expenseId),
     onSettled: () =>
       queryClient.invalidateQueries({ queryKey: [QUERY_RECURRING_EXPENSES] }),
-    onSuccess: (res) =>
+    onSuccess: () =>
       showToast({
         title: "Successfully Deleted Recurring Expense",
         message: "Recurring expense has been removed successfully",

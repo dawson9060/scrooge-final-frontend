@@ -6,17 +6,13 @@ import { useMutation } from "@tanstack/react-query";
 import { QUERY_REMINDERS } from "../queryKeys";
 import dayjs from "dayjs";
 
-const add = async (reminder: Reminder) => {
-  const newReminder = { ...reminder };
-
+const add = async ({ name, date }: { name: string; date: string }) => {
   // saves the timestamp to the start of the day (00:00:00) in local timezone
-  const timestamp = dayjs(reminder.date).startOf("day").valueOf();
-
-  newReminder.date = String(timestamp);
+  const timestamp = dayjs(date).startOf("day").valueOf();
 
   return await axiosInstance.post(
     `${process.env.NEXT_PUBLIC_API_URL}/reminders`,
-    newReminder
+    { name, date: timestamp }
   );
 };
 
@@ -39,10 +35,10 @@ export const useAddReminder = () => {
   const queryClient = getQueryClient();
 
   const addReminder = useMutation({
-    mutationFn: async (reminder: Reminder) => add(reminder),
+    mutationFn: async (data: { name: string; date: string }) => add(data),
     onSettled: () =>
       queryClient.invalidateQueries({ queryKey: [QUERY_REMINDERS] }),
-    onSuccess: (res) =>
+    onSuccess: () =>
       showToast({
         title: "Successfully Added Reminder",
         message: `Your reminders have been updated`,
@@ -94,7 +90,7 @@ export const useDeleteReminder = () => {
     mutationFn: async (reminderId: number) => reminderDelete(reminderId),
     onSettled: () =>
       queryClient.invalidateQueries({ queryKey: [QUERY_REMINDERS] }),
-    onSuccess: (res) =>
+    onSuccess: () =>
       showToast({
         title: "Successfully Deleted Reminder",
         message: "Reminder has been removed successfully",
