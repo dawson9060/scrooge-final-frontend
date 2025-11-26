@@ -2,13 +2,14 @@
 
 import { Tabs } from "@mantine/core";
 import Calendar from "./Calendar";
-import RecurringExpenses from "./recurring/recurringExpenses";
-import RecurringExpenseForm from "./recurring/recurringInputs";
-import ReminderForm from "./reminders/reminderInputs";
-import Reminders from "./reminders/reminders";
+import RecurringExpenses from "./recurring/RecurringExpenses";
+import RecurringExpenseForm from "./recurring/RecurringInputs";
+import ReminderForm from "./reminders/ReminderInputs";
+import Reminders from "./reminders/Reminders";
 import QuickAdd from "./summary/QuickAdd";
-import UniqueExpenses from "./unique/uniqueExpenses";
-import UniqueExpenseForm from "./unique/uniqueInputs";
+import UniqueExpenses from "./unique/UniqueExpenses";
+import UniqueExpenseForm from "./unique/UniqueInputs";
+import RecurringDonutChart from "./charts/RecurringDonutChart";
 
 const TAB_SUMMARY = "summary";
 const TAB_RECURRING = "recurring";
@@ -33,6 +34,7 @@ const TabsWrapper = () => {
       <Tabs.Panel value={TAB_RECURRING}>
         <RecurringExpenseForm />
         <RecurringExpenses />
+        <RecurringDonutChart />
       </Tabs.Panel>
 
       <Tabs.Panel value={TAB_UNIQUE}>

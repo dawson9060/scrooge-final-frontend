@@ -7,7 +7,7 @@ const Expense = ({ expense }: { expense: RecurringExpense }) => {
   const deleteExpense = useDeleteRecurringExpense();
 
   const handleDeleteExpense = async () => {
-    deleteExpense.mutate(expense.id!!);
+    deleteExpense.mutate(expense.id!);
   };
 
   return (

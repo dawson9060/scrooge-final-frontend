@@ -5,5 +5,5 @@ export type UniqueExpense = {
   name: string;
   amount: number;
   type: typeof UNIQUE_TYPE_EXPENSE | typeof UNIQUE_TYPE_DEPOSIT;
-  date: string;
+  date: number;
 };

@@ -39,7 +39,7 @@ const AddReminderModal = ({ date, opened, close }: AddReminderProps) => {
   return (
     <Modal opened={opened} onClose={close} title="Add Reminder">
       <form action={(data) => handleSave(data)}>
-        <ModalBody>
+        <ModalBody p="0">
           <Stack gap="lg">
             <Stack gap="xs">
               <Text>Reminder Date: {dayjs(date).format("MM-DD-YYYY")}</Text>
