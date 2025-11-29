@@ -9,6 +9,7 @@ import {
   getLastDayInMonth,
 } from "@/utilities/generalUtilities";
 import { DatePickerPopover } from "./DatePickerPopover";
+import { jsonToCSV } from "react-papaparse";
 
 const Expense = ({ expense }: { expense: UniqueExpense }) => {
   const deleteExpense = useDeleteUniqueExpense();
@@ -50,6 +51,32 @@ const UniqueExpenses = () => {
     });
   }, [expenses, selectedRange]);
 
+  const handleDownload = () => {
+    const formattedExpenses = expensesInRange?.map((expense: UniqueExpense) => {
+      return {
+        Amount: expense.amount,
+        Type: expense.type,
+        Name: expense.name,
+        Date: new Date(expense.date).toLocaleDateString(),
+      };
+    });
+
+    if (formattedExpenses) {
+      const csvString = jsonToCSV(formattedExpenses);
+
+      const file = new Blob([csvString], { type: "text/csv" });
+      const a = document.createElement("a");
+
+      a.download = "expenses";
+      a.href = URL.createObjectURL(file);
+      a.addEventListener("click", (e) => {
+        setTimeout(() => URL.revokeObjectURL(a.href), 30 * 1000);
+      });
+
+      a.click();
+    }
+  };
+
   return (
     <>
       <Stack>
@@ -57,6 +84,9 @@ const UniqueExpenses = () => {
           selectedRange={selectedRange}
           setSelectedRange={setSelectedRange}
         />
+        <Button color="gold" onClick={handleDownload}>
+          Download
+        </Button>
         {expensesInRange?.length > 0 ? (
           expensesInRange.map((expense: UniqueExpense) => (
             <Expense key={expense.id} expense={expense} />
