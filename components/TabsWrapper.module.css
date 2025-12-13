@@ -1,0 +1,22 @@
+.tabContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+@media (width <= 500px) {
+  .list {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    justify-content: center;
+    background-color: var(--mantine-color-blue-0);
+    border-top-left-radius: var(--mantine-radius-md);
+    border-top-right-radius: var(--mantine-radius-md);
+    padding: 0.5rem;
+  }
+
+  .panel {
+    padding-bottom: 3rem;
+  }
+}

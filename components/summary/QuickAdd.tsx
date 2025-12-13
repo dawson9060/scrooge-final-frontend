@@ -2,7 +2,7 @@
 
 import { useAddUniqueExpense } from "@/data/mutate/mutateUnique";
 import { UNIQUE_TYPE_EXPENSE } from "@/types/expense";
-import { Button, Group } from "@mantine/core";
+import { Button, Group, Stack, Text } from "@mantine/core";
 
 const QuickAdd = () => {
   const addUniqueExpense = useAddUniqueExpense();
@@ -12,18 +12,31 @@ const QuickAdd = () => {
       name: "Quick Add",
       amount,
       type: UNIQUE_TYPE_EXPENSE,
-      date: new Date().toLocaleDateString(),
+      date: new Date().getTime(),
     });
   };
 
   return (
-    <Group>
-      <Button onClick={handleAdd(1)}>$1</Button>
-      <Button onClick={handleAdd(2)}>$2</Button>
-      <Button onClick={handleAdd(5)}>$5</Button>
-      <Button onClick={handleAdd(10)}>$10</Button>
-      <Button onClick={handleAdd(20)}>$20</Button>
-    </Group>
+    <Stack>
+      <Text>Quick Expense</Text>
+      <Group>
+        <Button variant="outline" onClick={handleAdd(1)}>
+          $1
+        </Button>
+        <Button variant="outline" onClick={handleAdd(2)}>
+          $2
+        </Button>
+        <Button variant="outline" onClick={handleAdd(5)}>
+          $5
+        </Button>
+        <Button variant="outline" onClick={handleAdd(10)}>
+          $10
+        </Button>
+        <Button variant="outline" onClick={handleAdd(20)}>
+          $20
+        </Button>
+      </Group>
+    </Stack>
   );
 };
 

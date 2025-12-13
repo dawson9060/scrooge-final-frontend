@@ -1,7 +1,7 @@
 .root {
   border-radius: var(--mantine-radius-md);
-  box-shadow: var(--mantine-shadow-md);
-  background-color: var(--mantine-color-blue-5);
+  /* box-shadow: var(--mantine-shadow-md); */
+  /* background-color: var(--mantine-color-blue-5); */
 }
 
 .label {

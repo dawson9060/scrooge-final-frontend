@@ -3,7 +3,7 @@
 import { STATUS_OK } from "@/enums/status-enums";
 import { useAuth } from "@/hooks/auth";
 import useToast from "@/hooks/toast";
-import { ActionIcon, Box, Burger, Button, Group, Text } from "@mantine/core";
+import { ActionIcon, Box, Group, Text } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { TbSun } from "react-icons/tb";
@@ -46,23 +46,14 @@ const NavbarClient = () => {
         {user ? (
           <>
             <Group className={classes.links}>
-              <Text variant="link">Reminders</Text>
-              <Text variant="link">Logout</Text>
               <ActionIcon size="sm" variant="transparent">
                 <TbSun />
-                {/* {computedColorScheme === "dark" ? (
-              <IconSunFilled color="ghostwhite" />
-            ) : (
-              <IconMoon color="black" />
-            )} */}
               </ActionIcon>
-              <Button onClick={handleLogout}>Logout</Button>
+              <Text variant="link">Settings</Text>
+              <Text variant="link" onClick={handleLogout}>
+                Logout
+              </Text>
             </Group>
-            <Burger
-              className={classes.burger}
-              // opened={opened}
-              // onClick={() => setOpened((o) => !o)}
-            />
           </>
         ) : (
           <Link href="/auth">Login / Register</Link>

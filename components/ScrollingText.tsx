@@ -11,9 +11,8 @@ export const ScrollingText = () => {
     "Beware of little expenses; a small leak will sink a great ship",
     "Fun is temporary, money is eternal",
     "Chase your dreams, but not with my money",
-    "A fool and his money are soon parted",
-    "The lack of money is the root of all evil",
-    "It's not how much money you make, but how much money you keep",
+    "The world would be a better place if I had more money",
+    "It's not how much money you make, but how much you refuse to give to others",
   ];
 
   return (

@@ -1,3 +1,32 @@
 .fc-daygrid-day {
   cursor: pointer;
 }
+
+.fc-toolbar-title {
+  font-size: 1.5rem !important;
+  font-weight: 400;
+}
+
+.fc-today-button {
+  background-color: var(--mantine-color-blue-5) !important;
+  padding: 5px !important;
+  border-radius: var(--mantine-radius-md) !important;
+}
+
+.fc-prev-button {
+  background-color: var(--mantine-color-blue-5) !important;
+  padding: 5px !important;
+  border-top-left-radius: var(--mantine-radius-md) !important;
+  border-bottom-left-radius: var(--mantine-radius-md) !important;
+}
+
+.fc-next-button {
+  background-color: var(--mantine-color-blue-7) !important;
+  padding: 5px !important;
+  border-top-right-radius: var(--mantine-radius-md) !important;
+  border-bottom-right-radius: var(--mantine-radius-md) !important;
+}
+
+.fc-toolbar {
+  margin-bottom: 0.5rem !important;
+}

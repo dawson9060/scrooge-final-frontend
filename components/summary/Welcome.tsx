@@ -12,7 +12,7 @@ export function Welcome() {
   const upcomingReminderCount = useAtomValue(upcomingRemindersAtom);
 
   return (
-    <Stack my="2rem">
+    <Stack my="1.5rem">
       <Stack>
         <Group gap="0.5rem">
           <Text fw="bold" fz="h2">

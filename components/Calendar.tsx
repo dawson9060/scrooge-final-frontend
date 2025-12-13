@@ -91,7 +91,7 @@ const Calendar = () => {
   };
 
   return (
-    <Stack w="100%" p="lg">
+    <Stack w="100%" h="100%" mt="2rem">
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
