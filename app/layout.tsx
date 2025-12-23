@@ -1,5 +1,4 @@
-import Navbar from "@/components/Navbar";
-import { Provider as JotaiProvider } from "jotai";
+import { theme } from "@/mantine/theme";
 import Providers from "@/utilities/ReactQuery/Providers";
 import {
   ColorSchemeScript,
@@ -7,10 +6,10 @@ import {
   MantineProvider,
 } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
+import { Provider as JotaiProvider } from "jotai";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { theme } from "@/mantine/theme";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -19,8 +18,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "PawSwap",
-  description: "The ultimate place to find your next pet-sitter",
+  title: "Scrooge",
+  description: "Come and be shamed for your spending habits",
 };
 
 export default function RootLayout({
@@ -37,10 +36,7 @@ export default function RootLayout({
         <MantineProvider theme={theme}>
           <Notifications />
           <JotaiProvider>
-            <Providers>
-              <Navbar />
-              {children}
-            </Providers>
+            <Providers>{children}</Providers>
           </JotaiProvider>
         </MantineProvider>
       </body>

@@ -4,7 +4,7 @@
   height: 100%;
 }
 
-@media (width <= 500px) {
+/* @media (width <= 500px) {
   .list {
     position: absolute;
     bottom: 0;
@@ -14,9 +14,9 @@
     border-top-left-radius: var(--mantine-radius-md);
     border-top-right-radius: var(--mantine-radius-md);
     padding: 0.5rem;
-  }
+  } */
 
-  .panel {
-    padding-bottom: 3rem;
-  }
+.panel {
+  padding-top: 1rem;
+  padding-bottom: 3rem;
 }

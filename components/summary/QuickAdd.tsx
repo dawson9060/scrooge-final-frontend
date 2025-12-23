@@ -17,7 +17,7 @@ const QuickAdd = () => {
   };
 
   return (
-    <Stack>
+    <Stack mt="2rem">
       <Text>Quick Expense</Text>
       <Group>
         <Button variant="outline" onClick={handleAdd(1)}>

@@ -69,7 +69,7 @@ const UniqueExpenses = () => {
 
       a.download = "expenses";
       a.href = URL.createObjectURL(file);
-      a.addEventListener("click", (e) => {
+      a.addEventListener("click", () => {
         setTimeout(() => URL.revokeObjectURL(a.href), 30 * 1000);
       });
 

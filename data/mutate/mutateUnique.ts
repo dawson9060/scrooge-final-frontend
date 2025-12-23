@@ -12,7 +12,7 @@ const add = async (expense: UniqueExpense) => {
   // saves the timestamp to the start of the day (00:00:00) in local timezone
   const timestamp = dayjs(newExpense.date).startOf("day").valueOf();
 
-  newExpense.date = String(timestamp);
+  newExpense.date = timestamp;
 
   return await axiosInstance.post(
     `${process.env.NEXT_PUBLIC_API_URL}/uniqueExpenses`,
@@ -42,7 +42,7 @@ export const useAddUniqueExpense = () => {
     mutationFn: async (uniqueExpense: UniqueExpense) => add(uniqueExpense),
     onSettled: () =>
       queryClient.invalidateQueries({ queryKey: [QUERY_UNIQUE_EXPENSES] }),
-    onSuccess: (res) =>
+    onSuccess: () =>
       showToast({
         title: "Successfully Added Expense",
         message: `Your unique expenses have been updated`,
@@ -94,7 +94,7 @@ export const useDeleteUniqueExpense = () => {
     mutationFn: async (expenseId: number) => expenseDelete(expenseId),
     onSettled: () =>
       queryClient.invalidateQueries({ queryKey: [QUERY_UNIQUE_EXPENSES] }),
-    onSuccess: (res) =>
+    onSuccess: () =>
       showToast({
         title: "Successfully Deleted Expense",
         message: "Expense has been removed successfully",

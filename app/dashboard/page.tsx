@@ -1,6 +1,6 @@
 import { ScrollingText } from "@/components/ScrollingText";
-import Welcome from "@/components/summary/Welcome";
 import TabsWrapper from "@/components/TabsWrapper";
+import Welcome from "@/components/Welcome";
 import { fetchRecurringExpensesServer } from "@/data/fetch/server/fetchRecurringExpensesServer";
 import { fetchRemindersServer } from "@/data/fetch/server/fetchRemindersServer";
 import { fetchUniqueExpensesServer } from "@/data/fetch/server/fetchUniqueExpensesServer";
