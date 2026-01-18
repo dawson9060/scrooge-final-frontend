@@ -2,6 +2,7 @@ import { Button, Group, Popover } from "@mantine/core";
 import { DatesRangeValue, MonthPicker } from "@mantine/dates";
 import "@mantine/dates/styles.css";
 import dayjs from "dayjs";
+import { TbCalendar } from "react-icons/tb";
 
 export const DatePickerPopover = ({
   selectedRange,
@@ -29,7 +30,11 @@ export const DatePickerPopover = ({
   return (
     <Popover width={200} position="bottom-end" withArrow shadow="md">
       <Popover.Target>
-        <Button fw="normal" color="gold">
+        <Button
+          fw="normal"
+          color="gold"
+          rightSection={<TbCalendar size="1.25rem" />}
+        >
           {date}
         </Button>
       </Popover.Target>

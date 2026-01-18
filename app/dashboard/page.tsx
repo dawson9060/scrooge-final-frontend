@@ -1,3 +1,5 @@
+import EditRecurringModal from "@/components/modals/EditRecurringModal";
+import EditUniqueModal from "@/components/modals/EditUniqueModal";
 import { ScrollingText } from "@/components/ScrollingText";
 import TabsWrapper from "@/components/TabsWrapper";
 import Welcome from "@/components/Welcome";
@@ -44,9 +46,10 @@ const Dashboard = async () => {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Stack>
         <ScrollingText />
-        <Welcome />
         <TabsWrapper />
       </Stack>
+      <EditRecurringModal />
+      <EditUniqueModal />
     </HydrationBoundary>
   );
 };

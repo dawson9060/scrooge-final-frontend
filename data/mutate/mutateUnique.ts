@@ -21,9 +21,16 @@ const add = async (expense: UniqueExpense) => {
 };
 
 const update = async (expense: UniqueExpense) => {
+  const newExpense = { ...expense };
+
+  // saves the timestamp to the start of the day (00:00:00) in local timezone
+  const timestamp = dayjs(newExpense.date).startOf("day").valueOf();
+
+  newExpense.date = timestamp;
+
   return await axiosInstance.put(
     `${process.env.NEXT_PUBLIC_API_URL}/uniqueExpenses/${expense.id}`,
-    expense
+    newExpense
   );
 };
 

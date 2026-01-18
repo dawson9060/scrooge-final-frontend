@@ -64,6 +64,31 @@ export const RecurringDonutChart = () => {
   }, [recurringExpenses]);
 
   return (
+    <Stack w="100%" align="center" justify="center">
+      <DonutChart
+        h={400}
+        size={width > 380 ? 270 : 150}
+        thickness={width > 380 ? 30 : 20}
+        paddingAngle={5}
+        valueFormatter={(value: number) => `$${formatNumber(value)}`}
+        data={Object.values(donutData)}
+        tooltipDataSource="segment"
+        tooltipAnimationDuration={2000}
+        pieProps={{
+          isAnimationActive: true,
+          animationDuration: 2000,
+          dataKey: "value",
+        }}
+      />
+      <Group align="flex-start" justify="center" w="100%" maw="400px">
+        {visibleLegendItems.map((type) => (
+          <LegendItem key={type} color={EXPENSE_COLOR_MAP[type]} name={type} />
+        ))}
+      </Group>
+    </Stack>
+  );
+
+  return (
     <Group mih="400px" w="100%" wrap="nowrap">
       {/* <ResponsiveContainer height={"100%"} minHeight={400}> */}
       <DonutChart

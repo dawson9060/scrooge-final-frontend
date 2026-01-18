@@ -1,0 +1,57 @@
+.expenseItem {
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  flex-wrap: nowrap;
+  background-color: ghostwhite;
+  border-radius: 0.5rem;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.expenseName {
+  width: 40%;
+}
+
+.expenseAmount {
+  width: 20%;
+}
+
+.expenseType {
+  width: 20%;
+}
+
+.expenseDate {
+  width: 10%;
+}
+
+.expenseActions {
+  width: 10%;
+}
+
+@media (width < 800px) {
+  .expenseName {
+    width: 60%;
+  }
+
+  .expenseAmount {
+    width: 20%;
+  }
+
+  .expenseType {
+    display: none;
+  }
+
+  .expenseDate {
+    display: none;
+  }
+
+  .expenseActions {
+    width: 20%;
+  }
+}

@@ -1,16 +1,19 @@
 import { AreaChart } from "@mantine/charts";
 
 import "@mantine/charts/styles.css";
-import { Box, Stack, Text, useMantineColorScheme } from "@mantine/core";
+import { Box, useMantineColorScheme } from "@mantine/core";
 import { useMemo } from "react";
 import { ResponsiveContainer } from "recharts";
 
 import { UniqueExpense } from "@/types/uniqueExpense";
-import { formatNumber, getAllDaysInRange } from "@/utilities/generalUtilities";
+import {
+  formatNumber,
+  getAllDaysInRange,
+  getLastDayInMonth,
+} from "@/utilities/generalUtilities";
 
 interface ExpenseProp {
   expenses: UniqueExpense[];
-  selectedRange: [Date, Date | null];
 }
 
 const createChartData = (expenses: UniqueExpense[]) => {
@@ -21,6 +24,13 @@ const createChartData = (expenses: UniqueExpense[]) => {
     expenses[expenses.length - 1].date
   );
 
+  const lastDayInRange = getLastDayInMonth(
+    new Date(expenses[expenses.length - 1].date)
+  ).toLocaleDateString();
+  console.log("LAST DAY IN RANGE", lastDayInRange);
+
+  console.log("RANGE MAP", rangeMap);
+
   let runningTotal = 0;
   expenses.forEach((expense) => {
     const formattedDate = new Date(expense.date).toLocaleDateString();
@@ -30,64 +40,47 @@ const createChartData = (expenses: UniqueExpense[]) => {
     } else {
       runningTotal -= expense.amount;
     }
-
+    console.log("SETTING DATE", formattedDate, runningTotal);
     rangeMap.set(formattedDate, runningTotal);
   });
+
+  if (rangeMap.get(lastDayInRange) === null) {
+    rangeMap.set(lastDayInRange, runningTotal);
+  }
 
   const chartData: object[] = [];
   rangeMap.forEach((value, key) => {
     chartData.push({ date: key, expenses: value });
   });
-
+  console.log("CHART DATA", chartData);
   return chartData;
 };
 
-const UniqueExpenseChart = ({ expenses, selectedRange }: ExpenseProp) => {
-  //   const suprlus = useAtomValue(surplusAtom);
-
+const UniqueExpenseChart = ({ expenses }: ExpenseProp) => {
   const { colorScheme } = useMantineColorScheme();
 
   const chartData = useMemo(() => {
     return createChartData(expenses);
   }, [expenses]);
 
-  const isSingleMonth = selectedRange[1] === null;
-  // console.log("SELECTED RANGE", selectedRange);
-  // console.log("isSIngleMonth", isSingleMonth);
-  // console.log('chart data', chartData);
+  if (!expenses || expenses.length === 0) return null;
 
   return (
-    <Box w="100%" h="500px">
-      <ResponsiveContainer width={"100%"} height={"100%"} minHeight={"384px"}>
-        {chartData.length > 0 ? (
-          <AreaChart
-            h={"384px"}
-            bg={colorScheme === "light" ? "white" : "dark.0"}
-            p="md"
-            style={{ borderRadius: "12px" }}
-            data={chartData ?? []}
-            dataKey="date"
-            areaProps={{ isAnimationActive: true, animationDuration: 6000 }}
-            // referenceLines={
-            //   isSingleMonth
-            //     ? [{ y: suprlus, label: "Surplus", color: "red.6" }]
-            //     : []
-            // }
-            series={[{ name: "expenses", color: "gold" }]}
-            valueFormatter={(value) => `$${formatNumber(value)}`}
-            curveType="linear"
-            c="gold"
-          />
-        ) : (
-          <Stack
-            className="min-h-96 w-full h-full"
-            justify="center"
-            align="center"
-          >
-            <Text fw="bold">No Data Available</Text>
-          </Stack>
-        )}
-      </ResponsiveContainer>
+    <Box w="100%" h="400px" bg="orange">
+      {chartData.length > 0 && (
+        <AreaChart
+          h="400px"
+          bg={colorScheme === "light" ? "white" : "dark.0"}
+          p="md"
+          data={chartData ?? []}
+          dataKey="date"
+          areaProps={{ isAnimationActive: true, animationDuration: 4000 }}
+          series={[{ name: "expenses", color: "gold" }]}
+          valueFormatter={(value) => `$${formatNumber(value)}`}
+          curveType="linear"
+          c="gold"
+        />
+      )}
     </Box>
   );
 };

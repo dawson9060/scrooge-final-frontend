@@ -8,7 +8,8 @@ export const ScrollingText = () => {
   const scroogeSayings = [
     "Three square meals a day is not settled science",
     "These sayings are as unecessary as your student loans",
-    "Beware of little expenses; a small leak will sink a great ship",
+    "A penny saved is a penny earned, unless you spend it on fun",
+    "Take cheap as a compliment",
     "Fun is temporary, money is eternal",
     "Chase your dreams, but not with my money",
     "The world would be a better place if I had more money",

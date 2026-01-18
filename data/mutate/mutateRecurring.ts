@@ -22,9 +22,17 @@ const add = async (expense: RecurringExpense) => {
 };
 
 const update = async (expense: RecurringExpense) => {
+  const newExpense = { ...expense };
+  const date = expense.day_of_month;
+
+  if (expense.day_of_month) {
+    const day = dayjs(date).date();
+    newExpense.day_of_month = day;
+  }
+
   return await axiosInstance.put(
     `${process.env.NEXT_PUBLIC_API_URL}/recurringExpenses/${expense.id}`,
-    expense
+    newExpense
   );
 };
 
