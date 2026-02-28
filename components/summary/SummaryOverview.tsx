@@ -1,7 +1,6 @@
 "use client";
 
 import { useFetchRecurringExpenses } from "@/data/fetch/client/fetchRecurringExpensesClient";
-import { useFetchReminders } from "@/data/fetch/client/fetchRemindersClient";
 import { useFetchUniqueExpenses } from "@/data/fetch/client/fetchUniqueExpensesClient";
 import { useUpdateBudget } from "@/data/mutate/mutateUser";
 import { useAuth } from "@/hooks/auth";
@@ -12,60 +11,47 @@ import {
   getLastDayInMonth,
 } from "@/utilities/generalUtilities";
 import {
-  Box,
   Button,
-  Center,
   Group,
   Modal,
   NumberInput,
   SimpleGrid,
+  Stack,
+  Text,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useMemo, useState } from "react";
-import {
-  TbExclamationCircle,
-  TbFlagUp,
-  TbMoneybag,
-  TbZoomMoney,
-} from "react-icons/tb";
+import { TbMoneybag, TbReceipt, TbRepeat } from "react-icons/tb";
 
-const Tile = ({
-  color,
-  text,
-  icon,
-}: {
-  color: string;
-  text: string;
-  icon: React.ReactNode;
-}) => {
-  return (
-    <Center
-      bg={color}
-      bdrs="md"
-      h="5rem"
-      style={{
-        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-      }}
-    >
-      <Group gap="0.25rem">
-        {icon}
-        {text}
-      </Group>
-    </Center>
-  );
-};
+import classes from "./SummaryOverview.module.css";
 
-const RemindersTile = () => {
-  const { reminders } = useFetchReminders();
+import CountUp from "react-countup";
 
-  return (
-    <Tile
-      color="gold.1"
-      icon={<TbExclamationCircle />}
-      text={`Reminders: ${reminders?.length}`}
-    />
-  );
-};
+// const Tile = ({
+//   color,
+//   text,
+//   icon,
+// }: {
+//   color: string;
+//   text: string;
+//   icon: React.ReactNode;
+// }) => {
+//   return (
+//     <Center
+//       bg={color}
+//       bdrs="md"
+//       h="5rem"
+//       style={{
+//         boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+//       }}
+//     >
+//       <Group gap="0.25rem">
+//         {icon}
+//         {text}
+//       </Group>
+//     </Center>
+//   );
+// };
 
 const MonthlyExpensesTile = () => {
   const { recurringExpenses } = useFetchRecurringExpenses();
@@ -80,11 +66,19 @@ const MonthlyExpensesTile = () => {
   }, [recurringExpenses]);
 
   return (
-    <Tile
-      color="green.1"
-      icon={<TbFlagUp />}
-      text={`Monthly Expenses: $${totalMonthlyExpenses}`}
-    />
+    <Stack className={classes.tile}>
+      <Group gap="5px">
+        <TbRepeat size="1rem" />
+        <Text fz="1rem">Monthly Expenses</Text>
+      </Group>
+      <CountUp
+        start={0}
+        end={totalMonthlyExpenses}
+        duration={1.5}
+        prefix="$"
+        style={{ fontSize: "1.75rem", color: "red" }}
+      />
+    </Stack>
   );
 };
 
@@ -109,11 +103,21 @@ const UniqueExpensesTile = () => {
   }, [uniqueExpenses]);
 
   return (
-    <Tile
-      color="orange.1"
-      icon={<TbZoomMoney />}
-      text={`Unique Expenses: $${totalUniqueExpenses}`}
-    />
+    <Stack className={classes.tile}>
+      <Group gap="5px">
+        <TbReceipt size="1rem" />
+        <Text fz="1rem">
+          {new Date().toLocaleString("en-US", { month: "short" })} Expenses
+        </Text>
+      </Group>
+      <CountUp
+        start={0}
+        end={totalUniqueExpenses}
+        duration={2}
+        prefix="$"
+        style={{ fontSize: "1.75rem", color: "red" }}
+      />
+    </Stack>
   );
 };
 
@@ -142,13 +146,23 @@ const BudgetTile = () => {
 
   return (
     <>
-      <Box onClick={open} style={{ cursor: "pointer" }}>
-        <Tile
-          color="blue.1"
-          icon={<TbMoneybag />}
-          text={`Budget: $${user?.budget || 0}`}
+      <Stack
+        className={classes.tile}
+        onClick={open}
+        style={{ cursor: "pointer" }}
+      >
+        <Group gap="5px">
+          <TbMoneybag size="1rem" />
+          <Text fz="1rem">Budget</Text>
+        </Group>
+        <CountUp
+          start={0}
+          end={user?.budget || 0}
+          duration={1}
+          prefix="$"
+          style={{ fontSize: "1.75rem", color: "green" }}
         />
-      </Box>
+      </Stack>
       <Modal opened={opened} onClose={close} title="Update Budget">
         <NumberInput
           value={budget}
@@ -173,7 +187,6 @@ const SummaryOverview = () => {
   return (
     <SimpleGrid cols={{ base: 1, sm: 3 }}>
       <BudgetTile />
-      {/* <RemindersTile /> */}
       <MonthlyExpensesTile />
       <UniqueExpensesTile />
     </SimpleGrid>

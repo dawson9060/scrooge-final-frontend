@@ -3,7 +3,6 @@ import { AreaChart } from "@mantine/charts";
 import "@mantine/charts/styles.css";
 import { Box, useMantineColorScheme } from "@mantine/core";
 import { useMemo } from "react";
-import { ResponsiveContainer } from "recharts";
 
 import { UniqueExpense } from "@/types/uniqueExpense";
 import {
@@ -27,9 +26,6 @@ const createChartData = (expenses: UniqueExpense[]) => {
   const lastDayInRange = getLastDayInMonth(
     new Date(expenses[expenses.length - 1].date)
   ).toLocaleDateString();
-  console.log("LAST DAY IN RANGE", lastDayInRange);
-
-  console.log("RANGE MAP", rangeMap);
 
   let runningTotal = 0;
   expenses.forEach((expense) => {
@@ -40,7 +36,7 @@ const createChartData = (expenses: UniqueExpense[]) => {
     } else {
       runningTotal -= expense.amount;
     }
-    console.log("SETTING DATE", formattedDate, runningTotal);
+
     rangeMap.set(formattedDate, runningTotal);
   });
 
@@ -52,7 +48,7 @@ const createChartData = (expenses: UniqueExpense[]) => {
   rangeMap.forEach((value, key) => {
     chartData.push({ date: key, expenses: value });
   });
-  console.log("CHART DATA", chartData);
+
   return chartData;
 };
 

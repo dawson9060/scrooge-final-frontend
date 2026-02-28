@@ -1,6 +1,6 @@
 "use client";
 
-import { Stack } from "@mantine/core";
+import { Box, Stack } from "@mantine/core";
 
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction";
@@ -11,7 +11,7 @@ import {
 } from "@/utilities/generalUtilities";
 import { useFetchReminders } from "@/data/fetch/client/fetchRemindersClient";
 import { useFetchRecurringExpenses } from "@/data/fetch/client/fetchRecurringExpensesClient";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Reminder } from "@/types/reminder";
 import { RecurringExpense } from "@/types/recurringExpense";
 import "./Calendar.css";
@@ -33,6 +33,8 @@ const Calendar = () => {
   const { reminders } = useFetchReminders();
   const { recurringExpenses } = useFetchRecurringExpenses();
 
+  const calendarRef = useRef(null);
+
   const [
     addReminderOpened,
     { open: addReminderOpen, close: addReminderClose },
@@ -46,7 +48,7 @@ const Calendar = () => {
 
   const activeData = useMemo(() => {
     const data: object[] = [];
-    if (reminders?.length > 0 && recurringExpenses?.length > 0) {
+    if (reminders && recurringExpenses) {
       reminders.forEach((reminder: Reminder) => {
         data.push({
           title: reminder.name,
@@ -75,6 +77,12 @@ const Calendar = () => {
     return data;
   }, [reminders, recurringExpenses]);
 
+  useEffect(() => {
+    console.log("CALLING UPDATE SIZE");
+    const api = calendarRef.current?.getApi();
+    api?.updateSize();
+  }, [activeData]);
+
   const handleDateClick = (selectedDateObj: DateClickArg) => {
     setSelectedDate(selectedDateObj.date);
     addReminderOpen();
@@ -91,8 +99,11 @@ const Calendar = () => {
   };
 
   return (
-    <Stack w="100%" h="100%" mt="2rem">
+    <div style={{ height: "75vh", width: "100%" }}>
       <FullCalendar
+        ref={calendarRef}
+        key={activeData?.length}
+        height="100%"
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         validRange={() => {
@@ -121,7 +132,7 @@ const Calendar = () => {
         opened={viewReminderModalOpened}
         close={viewReminderClose}
       />
-    </Stack>
+    </div>
   );
 };
 

@@ -11,6 +11,7 @@ import {
   Button,
   Center,
   Group,
+  ScrollArea,
   Stack,
   Text,
   Title,
@@ -103,15 +104,17 @@ const ExpensesDisplay = ({ expenses }: { expenses: UniqueExpense[] }) => {
         </Box>
         <Group className={classes.expenseActions} />
       </Group>
-      <Stack gap="0.5rem">
-        {expenses?.length > 0 ? (
-          expenses.map((expense: UniqueExpense) => (
-            <Expense key={expense.id} expense={expense} />
-          ))
-        ) : (
-          <Text ta="center">No unique expenses found.</Text>
-        )}
-      </Stack>
+      <ScrollArea h="100%">
+        <Stack gap="0.5rem" h="100%" mah="45vh">
+          {expenses?.length > 0 ? (
+            expenses.map((expense: UniqueExpense) => (
+              <Expense key={expense.id} expense={expense} />
+            ))
+          ) : (
+            <Text ta="center">No unique expenses found.</Text>
+          )}
+        </Stack>
+      </ScrollArea>
     </Stack>
   );
 };

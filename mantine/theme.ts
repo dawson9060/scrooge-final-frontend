@@ -31,9 +31,22 @@ const blue: MantineColorsTuple = [
   "#004499",
 ];
 
+const darkCard: MantineColorsTuple = [
+  "#f8f9fa",
+  "#f1f3f5",
+  "#e9ecef",
+  "#dee2e6",
+  "#ced4da",
+  "#adb5bd",
+  "#868e96",
+  "#495057",
+  "#343a40",
+  "#1A1B1E",
+];
+
 export const theme = createTheme({
   fontFamily: "Poppins, serif",
-  colors: { gold, blue },
+  colors: { gold, blue, darkCard },
   components: {
     Button: Button.extend({ classNames: buttonClasses }),
     Text: Text.extend({ classNames: textClasses }),

@@ -6,21 +6,21 @@ import { RecurringExpense } from "@/types/recurringExpense";
 import {
   ActionIcon,
   Box,
-  Button,
-  ComboboxItem,
   Group,
-  Menu,
+  ScrollArea,
   Select,
   Stack,
+  Tabs,
   Text,
   Title,
 } from "@mantine/core";
 import { useSetAtom } from "jotai";
+import { useEffect, useState } from "react";
 import { TbTrash } from "react-icons/tb";
+import Calendar from "../Calendar";
 import RecurringDonutChart from "../charts/RecurringDonutChart";
 import classes from "./RecurringExpenses.module.css";
 import RecurringExpenseForm from "./RecurringInputs";
-import { useEffect, useState } from "react";
 
 const SORT_TYPE_AMOUNT = "Amount";
 const SORT_TYPE_NAME = "Name";
@@ -77,6 +77,44 @@ const ExpenseItem = ({ expense }: { expense: RecurringExpense }) => {
   );
 };
 
+const ChartWrapper = () => {
+  const TAB_PIE = "pie";
+  const TAB_CALENDAR = "calendar";
+
+  return (
+    <Stack gap="1rem" mih="75vh" style={{ flex: 1, minHeight: 0 }}>
+      <Tabs
+        color="gold.5"
+        defaultValue={TAB_PIE}
+        variant="outline"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          flex: 1,
+          minHeight: 0,
+        }}
+      >
+        <Tabs.List>
+          <Tabs.Tab value={TAB_CALENDAR}>Calendar</Tabs.Tab>
+          <Tabs.Tab value={TAB_PIE}>Donut Chart</Tabs.Tab>
+        </Tabs.List>
+
+        <Tabs.Panel
+          value={TAB_CALENDAR}
+          style={{ flex: 1, display: "flex", minHeight: 0 }}
+        >
+          <Box style={{ flex: 1, minHeight: 0 }}>
+            <Calendar />
+          </Box>
+        </Tabs.Panel>
+        <Tabs.Panel value={TAB_PIE}>
+          <RecurringDonutChart />
+        </Tabs.Panel>
+      </Tabs>
+    </Stack>
+  );
+};
+
 const RecurringExpenses = () => {
   const [sortType, setSortType] = useState<string>(SORT_TYPE_AMOUNT);
   const [displayExpenses, setDisplayExpenses] = useState<RecurringExpense[]>(
@@ -101,7 +139,7 @@ const RecurringExpenses = () => {
   }, [expenses, sortType]);
 
   return (
-    <Stack gap="1rem">
+    <Stack gap="1rem" mih="75vh" style={{ flex: 1, minHeight: 0 }}>
       <Group justify="space-between" align="center">
         <Title order={3}>Recurring Expenses</Title>
         <Select
@@ -130,17 +168,19 @@ const RecurringExpenses = () => {
           <Group className={classes.expenseActions} />
         </Group>
 
-        <Stack gap="0.5rem">
-          {displayExpenses?.length > 0 ? (
-            displayExpenses.map((expense: RecurringExpense) => (
-              <ExpenseItem key={expense.id} expense={expense} />
-            ))
-          ) : (
-            <Text ta="center">No recurring expenses found.</Text>
-          )}
-        </Stack>
+        <ScrollArea h="100%">
+          <Stack gap="0.5rem" h="100%" mah="50vh">
+            {displayExpenses?.length > 0 ? (
+              displayExpenses.map((expense: RecurringExpense) => (
+                <ExpenseItem key={expense.id} expense={expense} />
+              ))
+            ) : (
+              <Text ta="center">No recurring expenses found.</Text>
+            )}
+          </Stack>
+        </ScrollArea>
       </Stack>
-      <RecurringDonutChart />
+      <ChartWrapper />
     </Stack>
   );
 };

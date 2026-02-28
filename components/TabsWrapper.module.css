@@ -39,22 +39,25 @@
 }
 
 .list {
-  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.25rem;
   height: 100%;
   width: 200px !important;
   min-width: 200px !important;
-  /* flex-grow: 1;
-  flex-direction: column; */
   padding: 1rem;
-  /* margin: 3px; */
   box-shadow: var(--mantine-shadow-sm);
   border-radius: var(--mantine-radius-sm);
   background-color: ghostwhite;
 }
 
+[data-mantine-color-scheme="dark"] .list {
+  background-color: var(--mantine-color-darkCard-8);
+}
+
 .panel {
   height: 100%;
-  /* margin-left: 1rem; */
   padding: 0 1.5rem 0 1.5rem;
   overflow-y: auto;
   overflow-x: hidden;
@@ -70,6 +73,21 @@
 
   &[data-active] {
     background-color: var(--mantine-color-gold-5);
+    color: white;
+    border-color: var(--mantine-color-gold-5);
+  }
+}
+
+[data-mantine-color-scheme="dark"] .tab {
+  background-color: var(--mantine-color-darkCard-7);
+  color: white;
+
+  &:hover {
+    background-color: var(--mantine-color-gold-7) !important;
+  }
+
+  &[data-active] {
+    background-color: var(--mantine-color-gold-8);
     color: white;
     border-color: var(--mantine-color-gold-5);
   }

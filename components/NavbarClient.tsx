@@ -1,33 +1,16 @@
 "use client";
 
-import { STATUS_OK } from "@/enums/status-enums";
 import { useAuth } from "@/hooks/auth";
-import useToast from "@/hooks/toast";
-import { ActionIcon, Box, Group, Text } from "@mantine/core";
+import { ActionIcon, Box, Group, useMantineColorScheme } from "@mantine/core";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { TbSun } from "react-icons/tb";
-
+import { TbMoon, TbSun } from "react-icons/tb";
 import classes from "./Navbar.module.css";
 
 const NavbarClient = () => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
-  const router = useRouter();
-
-  const { showToast } = useToast();
-
-  const handleLogout = async () => {
-    const response = await logout();
-
-    if (response.status === STATUS_OK) {
-      showToast({ message: "Logout successful", color: "green" });
-
-      router.push("/");
-    } else {
-      showToast({ message: "Logout failed", color: "red" });
-    }
-  };
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const isDarkMode = colorScheme === "dark";
 
   return (
     <Group w="100%">
@@ -46,13 +29,17 @@ const NavbarClient = () => {
         {user ? (
           <>
             <Group className={classes.links}>
-              <ActionIcon size="sm" variant="transparent">
-                <TbSun />
+              <ActionIcon
+                size="sm"
+                variant="transparent"
+                onClick={() => toggleColorScheme()}
+              >
+                {isDarkMode ? (
+                  <TbSun size="1.25rem" />
+                ) : (
+                  <TbMoon size="1.25rem" />
+                )}
               </ActionIcon>
-              <Text variant="link">Settings</Text>
-              <Text variant="link" onClick={handleLogout}>
-                Logout
-              </Text>
             </Group>
           </>
         ) : (

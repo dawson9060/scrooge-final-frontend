@@ -1,0 +1,12 @@
+.tile {
+  background-color: ghostwhite;
+
+  padding: 1rem;
+  border-radius: var(--mantine-radius-md);
+  align-items: center;
+  gap: 5px;
+}
+
+[data-mantine-color-scheme="dark"] .tile {
+  background-color: var(--mantine-color-darkCard-8);
+}

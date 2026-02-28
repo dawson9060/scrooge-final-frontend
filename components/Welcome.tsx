@@ -12,13 +12,12 @@ export function Welcome() {
   const upcomingReminderCount = useAtomValue(upcomingRemindersAtom);
 
   return (
-    // <Stack>
     <Stack gap="sm">
       <Group gap="0.5rem">
-        <Text fw="bold" fz="h3">
+        <Text fw="bold" fz="h2">
           {getTimeGreeting()},{" "}
         </Text>
-        <Text fw="bold" fz="h3" c="gold.5">
+        <Text fw="bold" fz="h2" c="gold.5">
           {user?.name ?? user?.email}
         </Text>
       </Group>
@@ -29,7 +28,6 @@ export function Welcome() {
         </Text>
       </Group>
     </Stack>
-    // </Stack>
   );
 }
 

@@ -20,7 +20,7 @@ export const getLastDayInMonth = (date: Date) => {
   return new Date(year, month, 0, 23, 59, 59);
 };
 
-export const getAllDaysInRange = (start: string, end: string) => {
+export const getAllDaysInRange = (start: number, end: number) => {
   const days = new Map();
 
   const startDate = getFirstDayInMonth(new Date(start));

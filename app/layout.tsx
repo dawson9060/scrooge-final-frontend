@@ -30,10 +30,10 @@ export default function RootLayout({
   return (
     <html lang="en" {...mantineHtmlProps} className={poppins.variable}>
       <head>
-        <ColorSchemeScript />
+        <ColorSchemeScript defaultColorScheme="light" />
       </head>
       <body className={`${poppins.variable}`}>
-        <MantineProvider theme={theme}>
+        <MantineProvider theme={theme} defaultColorScheme="light">
           <Notifications />
           <JotaiProvider>
             <Providers>{children}</Providers>
